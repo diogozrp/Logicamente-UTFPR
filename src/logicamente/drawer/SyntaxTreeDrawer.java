@@ -42,11 +42,17 @@ public class SyntaxTreeDrawer extends JFrame implements ActionListener {
 	private JPanel drawingPanel;
 	private JPanel topPanel;
 	private JPanel infoPanel;
+	private JPanel logicGamesPanel;
 	private JLabel errorPanel;
+	private JLabel logicGames;
+	private JLabel logicGamesResult;
+	
 	private JPanel formulaInfoPanel;
+	
 	private JTextField complexityTextField;
 	private JTextField heightTextField;
 	private JTextField negativesTextField;
+	private JTextField logicGamesMaxParentheses;
 
 	private javax.swing.JLabel inputFormulaLabel;
 	private javax.swing.JTextField inputFormulaTextField;
@@ -55,6 +61,7 @@ public class SyntaxTreeDrawer extends JFrame implements ActionListener {
 	private javax.swing.JButton btnImplies;
 	private javax.swing.JButton btnNot;
 	private javax.swing.JButton btnOr;
+	private JButton btnMaxParentheses;
 
 	private boolean showGridLines = false;
 
@@ -121,6 +128,14 @@ public class SyntaxTreeDrawer extends JFrame implements ActionListener {
 		inputFormulaTextField.setText(inputFormulaTextField.getText() + st);
 		inputFormulaTextField.grabFocus();
 	}
+	
+	private void btnMaxParenthesesClick() {
+		if(logicGamesMaxParentheses.getText().equals(formula.toString())){
+			logicGamesResult.setText("Right!");
+		}else{
+			logicGamesResult.setText("Wrong!");
+		}
+	}
 
 	private void drawScreen() {
 
@@ -135,13 +150,35 @@ public class SyntaxTreeDrawer extends JFrame implements ActionListener {
 
 		includeFormulaInputArea();
 		addConnectiveButtons();
+		addLogicGames();
 		setTopAndDrawingPanelProperties();
 		includeFormulaInfoPanel();
 		includeTopLevelInfoPanel();
 
 		JPanel topLevelPanel = createComplexLayout();
+		getContentPane().add(logicGamesPanel, BorderLayout.NORTH);
 		getContentPane().add(topLevelPanel, BorderLayout.CENTER);
 		getContentPane().add(infoPanel, BorderLayout.SOUTH);
+	}
+	
+	private void addLogicGames(){
+		logicGamesPanel = new JPanel();
+		logicGames = new JLabel("Logic Games", JLabel.CENTER);
+		logicGamesResult = new JLabel("", JLabel.CENTER);
+		logicGamesMaxParentheses = new JTextField(10);
+		btnMaxParentheses = new JButton();
+		btnMaxParentheses.setText("Try Max Parentheses");
+		btnMaxParentheses.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				btnMaxParenthesesClick();
+			}
+		});
+		logicGamesPanel.add(logicGames);
+		logicGamesPanel.add(logicGamesMaxParentheses);
+		logicGamesPanel.add(btnMaxParentheses);
+		logicGamesPanel.add(logicGamesResult);
+		logicGamesMaxParentheses.setEnabled(false);
+		btnMaxParentheses.setEnabled(false);
 	}
 
 	private void setTopAndDrawingPanelProperties() {
@@ -331,11 +368,15 @@ public class SyntaxTreeDrawer extends JFrame implements ActionListener {
 			formula = result.getFormula();
 			// System.out.println(formula);
 			errorPanel.setText("");
+			btnMaxParentheses.setEnabled(true);
+			logicGamesMaxParentheses.setEnabled(true);
 		} else {
 			formula = null;
 			if (grid != null)
 				grid.clear();
 			errorPanel.setText("Syntax error");
+			btnMaxParentheses.setEnabled(false);
+			logicGamesMaxParentheses.setEnabled(false);
 		}
 	}
 

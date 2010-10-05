@@ -1,147 +1,60 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. -->
-<project basedir="." default="build" name="Logicamente-UTFPR">
-    <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../../../../../../usr/lib/eclipse"/>
-    <property name="junit.output.dir" value="junit"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.6"/>
-    <property name="source" value="1.6"/>
-    <path id="JUnit 4.libraryclasspath">
-        <pathelement location="${ECLIPSE_HOME}/dropins/jdt/plugins/org.junit4_4.3.1/junit.jar"/>
-    </path>
-    <path id="Logicamente-UTFPR.classpath">
-        <pathelement location="bin"/>
-        <pathelement location="lib/java_cup.jar"/>
-        <pathelement location="lib/JFlex.jar"/>
-        <path refid="JUnit 4.libraryclasspath"/>
-    </path>
-    <target name="init">
-        <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src" excludes="**/*.launch, **/*.java"/>
-        </copy>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="test" excludes="**/*.launch, **/*.java"/>
-        </copy>
-    </target>
-    <target name="clean">
-        <delete dir="bin"/>
-    </target>
-    <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
-    <target name="build-subprojects"/>
-    <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
-            <src path="src"/>
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </javac>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
-            <src path="test"/>
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </javac>
-    </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
-        <copy todir="${ant.library.dir}">
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </copy>
-        <unzip dest="${ant.library.dir}">
-            <patternset includes="jdtCompilerAdapter.jar"/>
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </unzip>
-    </target>
-    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
-        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-        <antcall target="build"/>
-    </target>
-    <target name="SyntaxTreeDrawerAuxiliaryTests.testGetTreeNodes_EvenMoreComplexCompositeFormula">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="logicamente.drawer.SyntaxTreeDrawerAuxiliaryTests" todir="${junit.output.dir}"/>
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </junit>
-    </target>
-    <target name="SyntaxTreeDrawerAuxiliaryTests.testGetTreeNodes_for_the_negation_of_a_ComplexCompositeFormula">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="logicamente.drawer.SyntaxTreeDrawerAuxiliaryTests" todir="${junit.output.dir}"/>
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </junit>
-    </target>
-    <target name="SyntaxTreeDrawer">
-        <java classname="logicamente.drawer.SyntaxTreeDrawer" failonerror="true" fork="yes">
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </java>
-    </target>
-    <target name="Logicamente-UTFPR">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </junit>
-    </target>
-    <target name="FormulaComplexityTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="logicamente.formulas.FormulaComplexityTest" todir="${junit.output.dir}"/>
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </junit>
-    </target>
-    <target name="FormulaHeightTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="logicamente.formulas.FormulaHeightTest" todir="${junit.output.dir}"/>
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </junit>
-    </target>
-    <target name="SyntaxTreeDrawerAuxiliaryTests">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="logicamente.drawer.SyntaxTreeDrawerAuxiliaryTests" todir="${junit.output.dir}"/>
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </junit>
-    </target>
-    <target name="FormulasTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="logicamente.formulas.FormulasTest" todir="${junit.output.dir}"/>
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </junit>
-    </target>
-    <target name="SyntaxTreeDrawerAuxiliaryTests.testGetTreeNodes_MoreComplexCompositeFormula">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="logicamente.drawer.SyntaxTreeDrawerAuxiliaryTests" todir="${junit.output.dir}"/>
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </junit>
-    </target>
-    <target name="AllTests">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="alltests.AllTests" todir="${junit.output.dir}"/>
-            <classpath refid="Logicamente-UTFPR.classpath"/>
-        </junit>
-    </target>
-    <target name="junitreport">
-        <junitreport todir="${junit.output.dir}">
-            <fileset dir="${junit.output.dir}">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="${junit.output.dir}"/>
-        </junitreport>
-    </target>
+<project name="Logicamente-diogozrp" default="build" basedir=".">
+    <description>
+        Logicamente - diogozrp
+    </description>
+
+  <property name="src" location="src"/>
+  <property name="test" location="test"/>
+  <property name="build" location="build"/>
+  <property name="lib-dir" value="lib"/>
+  <property name="junit.output.dir" value="junit"/>
+
+  <path id="classpath.base">
+    <fileset dir="${lib-dir}" includes="**/*.jar"/>
+    <fileset dir="c:\Program Files\Java\jdk1.6.0_21\lib" includes="**/*.jar"/>
+    <pathelement location="${build}"/>
+  </path>
+
+  <path id="classpath.all">
+    <pathelement location="${ant.home}/lib/junit.jar"/>
+    <path refid="classpath.base"/>
+  </path>
+
+  <target name="init">
+    <tstamp/>
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init">
+    <javac srcdir="${src}" destdir="${build}" includeantruntime="false" encoding="UTF-8" classpathref="classpath.all"/>
+  </target>
+
+  <target name="compile-tests" depends="compile">
+    <mkdir dir="${test}"/>
+    <javac srcdir="${test}" destdir="${build}" debug="true" includeantruntime="false" encoding="UTF-8" classpathref="classpath.all"/>
+  </target>
+
+  <target name="jar" depends="compile-tests">
+    <mkdir dir="${build}/jar"/>
+    <path refid="classpath.all"/>
+    <jar jarfile="${build}/jar/Logicamente-UTFPR.jar" basedir="${build}"/>
+  </target>
+
+  <target name="allTests" depends="compile-tests">
+      <junit printsummary="yes" dir="${test}">
+          <formatter type="plain" usefile="false"/>
+          <classpath refid="classpath.all"/>
+	  <test name="alltests.AllTests"/>
+      </junit>
+  </target>
+
+  <target name="run">
+      <java classname="logicamente.drawer.SyntaxTreeDrawer" dir="${build}" fork="true">
+	<classpath refid="classpath.all"/>
+      </java>
+  </target>
+	
+  <target name="clean" >
+    <delete dir="${build}"/>
+  </target>
 </project>
